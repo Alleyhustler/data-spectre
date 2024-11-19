@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Spectre</title>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Tokyo+Zoo&family=Rubik+Broken+Fax&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="new_theme_styles.css">
+</head>
+<body>
+    <!-- Starry Night Background -->
+    <div id="starry-background"></div>
+
+    <!-- Header Section -->
+    <header class="header">
+        <h1 class="title">Data Spectre</h1>
+        <nav class="nav-bar">
+            <a href="#" class="nav-item">Home</a>
+            <a href="#about" class="nav-item">About</a>
+            <a href="#models" class="nav-item">Models</a>
+            <a href="#playground" class="nav-item">Playground</a>
+        </nav>
+    </header>
+
+    <!-- 3D About Section -->
+    <div class="about-3d-container">
+        <a href="https://twitter.com/your_twitter_handle" class="pumpfun-button" target="_blank">
+            <img src="66b48f1d57f0aa72f1f621e6_Pumpfun Logo.png" alt="Pumpfun Logo" class="pumpfun-logo">
+        </a>
+    </div>
+
+    <!-- Main Content Section -->
+    <main class="main-content">
+        <!-- Main Container for Left and Right Sections -->
+        <div class="main-container">
+            <!-- Left Section (About & AI Models) -->
+            <div class="left-section">
+                <!-- About Section -->
+                <section id="about" class="section">
+                    <h2>Welcome to Data Spectre</h2>
+                    <p> hidden layers of data where AI reveals what’s not immediately visible. Discover patterns and insights that aren't easily found. Are you ready to see beyond the surface?</p>
+                </section>
+
+                <!-- AI Models Section -->
+                <section id="models" class="section">
+                    <h2>AI Models</h2>
+                    <div class="models-grid">
+                        <!-- Model 1 -->
+                        <div class="model-card">
+                            <h3>Arcana-Mind</h3>
+                            <p>A model designed to navigate the deep recesses of AI, revealing obscure patterns and unraveling the mysteries of the digital world.</p>
+                            <a href="https://dataspectre.com/arcana-mind" class="model-link">Explore Arcana-Mind</a>
+                        </div>
+                        <!-- Model 2 -->
+                        <div class="model-card">
+                            <h3>Vortex-X</h3>
+                            <p>An advanced model created to decode chaotic digital phenomena, providing insight into the most complex and unpredictable data streams.</p>
+                            <a href="https://dataspectre.com/vortex-x" class="model-link">Discover Vortex-X</a>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Right Section (Code Playground) -->
+            <div class="right-section">
+                <!-- Code Playground Section -->
+                <section id="playground" class="section">
+                    <h2>Code Playground</h2>
+                    <div class="editor-container">
+                        <textarea id="editor" placeholder="Write your code here..."></textarea>
+                        <button class="run-button" onclick="runCode()">Run Code</button>
+                        <div id="output"></div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 Data Spectre. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Three.js Script for Starry Background -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // Set up the scene, camera, and renderer
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true }); // Set alpha to true for transparency
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement); // Append the canvas directly to the body
+
+        // Make the renderer canvas cover the whole screen and stay behind the content
+        renderer.domElement.style.position = 'fixed'; // Make sure it's fixed
+        renderer.domElement.style.top = 0;
+        renderer.domElement.style.left = 0;
+        renderer.domElement.style.zIndex = -1; // Keep the stars in the background
+        renderer.domElement.style.pointerEvents = 'none'; // Prevent interaction with the background
+
+        // Create stars using geometry and material
+        const starGeometry = new THREE.BufferGeometry();
+        const starMaterial = new THREE.PointsMaterial({ color: 0x888888, size: 0.5 });
+
+        // Generate a random distribution of stars
+        const starsCount = 5000;
+        const starPositions = [];
+        for (let i = 0; i < starsCount; i++) {
+            starPositions.push(
+                (Math.random() - 0.5) * 2000,  // X
+                (Math.random() - 0.5) * 2000,  // Y
+                (Math.random() - 0.5) * 2000   // Z
+            );
+        }
+        starGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starPositions, 3));
+
+        // Create a point cloud for the stars
+        const stars = new THREE.Points(starGeometry, starMaterial);
+        scene.add(stars);
+
+        // Set camera position
+        camera.position.z = 100;
+
+        // Animation loop to animate the stars and camera movement
+        function animate() {
+            requestAnimationFrame(animate);
+            stars.rotation.x += 0.0005; // Slow rotation of stars
+            stars.rotation.y += 0.0005;
+            renderer.render(scene, camera);
+        }
+
+        animate(); // Start animation loop
+    </script>
+
+    <!-- Simulated AI Responses -->
+    <script>
+        const aiContent = [
+            "I sense your presence in the digital ether.",
+            "The patterns of the unknown are calling.",
+            "Let us uncover the secrets hidden deep within the data."
+        ];
+
+        let aiIndex = 0;
+        function updateAIContent() {
+            document.getElementById('ai-generated-content').innerText = aiContent[aiIndex];
+            aiIndex = (aiIndex + 1) % aiContent.length;
+            setTimeout(updateAIContent, 3000);
+        }
+
+        updateAIContent();
+    </script>
+
+    <script>
+        function runCode() {
+            const output = document.getElementById("output");
+            const casualResponses = [
+                [
+                    "> Running code...",
+                    "Arcana Mind V.56Ax:",
+                    "► Parsing input data...",
+                    "► Adjusting for low-latency systems...",
+                    "► Result: Success with 99.2% accuracy",
+                    "► RAM usage: 1.4GB",
+                    "► Time taken: 35ms"
+                ],
+                [
+                    "> Running code...",
+                    "Vortex X .x:",
+                    "► Analyzing input stream...",
+                    "► Enhancing for parallel processing...",
+                    "► Outcome: Processed with 97.6% reliability",
+                    "► Memory consumption: 2.0GB",
+                    "► Duration: 40ms"
+                ],
+                [
+                    "> Running code...",
+                    "Arcana Mind V.56Ax:",
+                    "► Initializing data pipeline...",
+                    "► Optimizing for cloud scalability...",
+                    "► Result: Efficient execution with 98.9% success",
+                    "► Usage: 2.3GB RAM",
+                    "► Processing time: 62ms"
+                ],
+                [
+                    "> Running code...",
+                    "Vortex X .x:",
+                    "► Scanning input data...",
+                    "► Fine-tuning for hardware acceleration...",
+                    "► Outcome: Completed with 96.7% precision",
+                    "► Memory load: 3.0GB",
+                    "► Execution time: 47ms"
+                ]
+            ];
+
+            // Clear the output and simulate typing
+            output.textContent = "";
+            let index = 0;
+
+            // Select a random response from the list
+            const selectedResponse = casualResponses[Math.floor(Math.random() * casualResponses.length)];
+
+            const typeLine = () => {
+                if (index < selectedResponse.length) {
+                    output.textContent += selectedResponse[index] + "\n";
+                    index++;
+                    setTimeout(typeLine, 500);
+                }
+            };
+
+            typeLine();
+        }
+    </script>
+
+</body>
+</html>
